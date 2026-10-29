@@ -56,7 +56,7 @@ All benchmarks use 100,000,000 numbers and repeated runs per thread count.
 ### Runtime
 
 <p align="center">
-  <img src="plots/runtime.png" width="600" alt="Runtime vs. thread count">
+  <img src="plots/runtime.png" width="90%" alt="Runtime vs. thread count">
 </p>
 <p align="center"><em>Median runtime for average and variance with 1 to 4 threads.</em></p>
 
@@ -65,7 +65,7 @@ Runtime drops as threads are added. Variance takes longer than average because i
 ### Speedup
 
 <p align="center">
-  <img src="plots/speedup.png" width="600" alt="Parallel speedup vs. thread count">
+  <img src="plots/speedup.png" width="90%" alt="Parallel speedup vs. thread count">
 </p>
 <p align="center"><em>Speedup compared to 1 thread, with the ideal linear speedup as reference.</em></p>
 
@@ -74,7 +74,7 @@ Speedup is `time with 1 thread / time with N threads`. The dashed line is the id
 ### Speedup with Confidence Intervals
 
 <p align="center">
-  <img src="plots/speedup_ci.png" width="600" alt="Speedup with bootstrap 95% confidence intervals">
+  <img src="plots/speedup_ci.png" width="90%" alt="Speedup with bootstrap 95% confidence intervals">
 </p>
 <p align="center"><em>Same speedup, with bootstrap 95% confidence intervals as error bars.</em></p>
 
@@ -83,7 +83,7 @@ The error bars show how reliable each measurement is. Short bars mean the result
 ### Parallel Efficiency
 
 <p align="center">
-  <img src="plots/efficiency.png" width="600" alt="Parallel efficiency vs. thread count">
+  <img src="plots/efficiency.png" width="90%" alt="Parallel efficiency vs. thread count">
 </p>
 <p align="center"><em>Parallel efficiency (speedup divided by number of threads).</em></p>
 
@@ -92,7 +92,7 @@ Efficiency tells us how well each thread is being used. 1.0 means perfect scalin
 ### Runtime Distribution
 
 <p align="center">
-  <img src="plots/runtime_distribution.png" width="700" alt="Runtime distribution across repeated runs">
+  <img src="plots/runtime_distribution.png" width="90%" alt="Runtime distribution across repeated runs">
 </p>
 <p align="center"><em>Box plots of runtime across repeated runs (green triangle = mean, orange line = median).</em></p>
 
