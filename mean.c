@@ -5,6 +5,10 @@
 
 #define N_SAMPLES 1000000
 
+typedef struct{ double value; double time_taken;} CalculationResult;
+typedef long long ll;
+
+
 DWORD WINAPI worker(LPVOID arg){
     int id = *(int*)arg;
     return 0;
@@ -35,6 +39,14 @@ int get_number_of_threads(){
     if(threads_number > 0 && threads_number < 5) return threads_number;
     else printf("Invalid number of threads!\nUsing a single thread.");
     return 1;
+}
+
+CalculationResult calculate_average(const int* data, int number_of_samples, int number_of_threads){
+    LARGE_INTEGER start, end, frequency;
+    QueryPerformanceFrequency(&frequency);
+    QueryPerformanceCounter(&start);
+    
+
 }
 
 int main(void){
