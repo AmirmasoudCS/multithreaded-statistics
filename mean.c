@@ -51,6 +51,8 @@ int main(void){
                 printf("Failed to allocate memory!\n");
                 continue;
             }
+            // ops
+            free(data);
         }
         else if(choice==2){
             int threads_number = get_number_of_threads();
@@ -59,6 +61,8 @@ int main(void){
                 printf("Failed to allocate memory!\n");
                 continue;
             }
+            // ops
+            free(data);
         }
         else{
             printf("Wrong Input!\n");
