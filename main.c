@@ -89,6 +89,53 @@ CalculationResult calculate_average(const int* data, int number_of_samples, int 
     return result;
 }
 
+CalculationResult calculate_variance(const int* data, int number_of_samples, int number_of_threads){
+    LARGE_INTEGER start, end, frequency;
+    QueryPerformanceFrequency(&frequency);
+    QueryPerformanceCounter(&start);
+    HANDLE* threads = malloc(number_of_threads * sizeof(HANDLE));
+    ThreadData* thread_data = malloc(number_of_threads * sizeof(ThreadData));
+    int chunk = number_of_samples / number_of_threads;
+    for(int i = 0; i < number_of_threads; i++){
+        int start_index = i * chunk;
+        int end_index = (i==number_of_threads-1)? number_of_samples: start_index + chunk;
+        thread_data[i].data = data;
+        thread_data[i].start = start_index;
+        thread_data[i].end = end_index;
+        thread_data[i].partial_sum=0;
+        threads[i] = CreateThread(NULL, 0, average_worker, &thread_data[i], 0, NULL);
+    }
+    WaitForMultipleObjects(number_of_threads, threads, TRUE, INFINITE);
+    ll sum=0;
+    for(int j = 0; j < number_of_threads; j++){
+        sum+=thread_data[j].partial_sum;
+        CloseHandle(threads[j]);
+    }
+    QueryPerformanceCounter(&end);
+    double average = (double)sum / number_of_samples;
+    for(int i = 0; i < number_of_threads; i++){
+        int start_index = i * chunk;
+        int end_index = (i==number_of_threads-1)? number_of_samples: start_index + chunk;
+        thread_data[i].data = data;
+        thread_data[i].start = start_index;
+        thread_data[i].end = end_index;
+        thread_data[i].partial_sum=0;
+        threads[i] = CreateThread(NULL, 0, variance_worker, &thread_data[i], 0, NULL);
+    }
+    WaitForMultipleObjects(number_of_threads, threads, TRUE, INFINITE);
+    double total=0;
+    for(int i = 0; i < number_of_threads; i++){
+        total+=thread_data[i].partial_variance;
+        CloseHandle(threads[i]);
+    }
+    double variance = total / number_of_samples;
+    double elapsed = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
+    free(threads);
+    free(thread_data);
+    CalculationResult result = {variance, elapsed};
+    return result;
+}
+
 int main(void){
     
     srand(67);
