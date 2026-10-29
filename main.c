@@ -80,11 +80,11 @@ CalculationResult calculate_average(const int* data, int number_of_samples, int 
         sum+=thread_data[j].partial_sum;
         CloseHandle(threads[j]);
     }
+    free(threads);
+    free(thread_data);
     QueryPerformanceCounter(&end);
     double average = (double)sum / number_of_samples;
     double elapsed = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
-    free(threads);
-    free(thread_data);
     CalculationResult result = {average, elapsed};
     return result;
 }
@@ -128,11 +128,11 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
         total+=thread_data[i].partial_variance;
         CloseHandle(threads[i]);
     }
-    double variance = total / number_of_samples;
-    double elapsed = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
     free(threads);
     free(thread_data);
     QueryPerformanceCounter(&end);
+    double variance = total / number_of_samples;
+    double elapsed = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
     CalculationResult result = {variance, elapsed};
     return result;
 }
