@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N_SAMPLES 1000000
+#define N_SAMPLES 100000000
 
 typedef struct{ double value; double time_taken;} CalculationResult;
 typedef long long ll;
