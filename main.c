@@ -109,6 +109,8 @@ int main(void){
                 continue;
             }
             // ops
+            printf("Haven't implemented yet.\n");
+            //
             free(data);
         }
         else{
