@@ -11,7 +11,7 @@ typedef struct{ const int* data; int start; int end; ll partial_sum; double mean
 
 DWORD WINAPI average_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
-    double local_sum=0.0;
+    ll local_sum=0.0;
     for(ll i=args->start; i<args->end; i++){
         local_sum+=args->data[i];
     }
@@ -120,6 +120,7 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
         thread_data[i].end = end_index;
         thread_data[i].partial_sum=0;
         thread_data[i].mean = average;
+        thread_data[i].partial_variance=0.0;
         threads[i] = CreateThread(NULL, 0, variance_worker, &thread_data[i], 0, NULL);
     }
     WaitForMultipleObjects(number_of_threads, threads, TRUE, INFINITE);
