@@ -11,7 +11,7 @@ DWORD WINAPI worker(LPVOID arg){
 }
 
 void sep(){
-    print("=========================\n");
+    printf("=========================\n");
 }
 
 int* sample(int number_of_samples){
@@ -24,17 +24,17 @@ int* sample(int number_of_samples){
     for(int i = 0; i < number_of_samples; i++){
         data[i] = rand() % 100;
     }
+    printf("Sampling %d samples done!", number_of_samples);
     return data;
 }
 
 int get_number_of_threads(){
-    int threads_number = 1;
+    int threads_number;
     printf("Please enter the number of threads you would like to use: ");
     scanf("%d", &threads_number);
     if(threads_number > 0 && threads_number < 5) return threads_number;
     else printf("Invalid number of threads!\nUsing a single thread.");
-    return threads_number;
-
+    return 1;
 }
 
 int main(void){
@@ -45,10 +45,12 @@ int main(void){
         printf("What operation do you want to do?\n1. Average\n2. Variance\n");
         scanf("%d", &choice);
         if(choice==1){
-
+            int threads_number = get_number_of_threads();
+            int* data = sample(N_SAMPLES);
         }
         else if(choice==2){
-
+            int threads_number = get_number_of_threads();
+            int* data = sample(N_SAMPLES);
         }
         else{
             printf("Wrong Input!\n");
