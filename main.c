@@ -141,7 +141,10 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
 int main(void){
     
     srand(67);
-
+    int* data = sample(N_SAMPLES);
+    if(data==NULL){
+        printf("Failed to allocate memory!\n");
+    }
     int choice;
     while(1){
         sep();
@@ -155,11 +158,6 @@ int main(void){
         }
         else if(choice==1){
             int threads_number = get_number_of_threads();
-            int* data = sample(N_SAMPLES);
-            if(data==NULL){
-                printf("Failed to allocate memory!\n");
-                continue;
-            }
             CalculationResult result = calculate_average(data, N_SAMPLES, threads_number);
             sep();
             printf("Average of our %d data:\t%.2f\n", N_SAMPLES, result.value);
@@ -169,11 +167,6 @@ int main(void){
         }
         else if(choice==2){
             int threads_number = get_number_of_threads();
-            int* data = sample(N_SAMPLES);
-            if(data==NULL){
-                printf("Failed to allocate memory!\n");
-                continue;
-            }
             CalculationResult result = calculate_variance(data, N_SAMPLES, threads_number);
             sep();
             printf("Variance of our %d data:\t%.2f\n", N_SAMPLES, result.value);
