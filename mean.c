@@ -47,10 +47,18 @@ int main(void){
         if(choice==1){
             int threads_number = get_number_of_threads();
             int* data = sample(N_SAMPLES);
+            if(data==NULL){
+                printf("Failed to allocate memory!\n");
+                continue;
+            }
         }
         else if(choice==2){
             int threads_number = get_number_of_threads();
             int* data = sample(N_SAMPLES);
+            if(data==NULL){
+                printf("Failed to allocate memory!\n");
+                continue;
+            }
         }
         else{
             printf("Wrong Input!\n");
