@@ -7,9 +7,19 @@
 
 typedef struct{ double value; double time_taken;} CalculationResult;
 typedef long long ll;
-typedef struct{ const int* data; int start; int end; ll partial_sum;} ThreadData;
+typedef struct{ const int* data; int start; int end; ll partial_sum; ll mean;} ThreadData;
 
-DWORD WINAPI worker(LPVOID arg){
+DWORD WINAPI average_worker(LPVOID arg){
+    ThreadData* args = (ThreadData*)arg;
+    ll local_sum=0;
+    for(ll i=args->start; i<args->end; i++){
+        local_sum+=args->data[i];
+    }
+    args->partial_sum = local_sum;
+    return 0;
+}
+
+DWORD WINAPI variance_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
     ll local_sum=0;
     for(ll i=args->start; i<args->end; i++){
@@ -60,7 +70,7 @@ CalculationResult calculate_average(const int* data, int number_of_samples, int 
         thread_data[i].start = start_index;
         thread_data[i].end = end_index;
         thread_data[i].partial_sum=0;
-        threads[i] = CreateThread(NULL, 0, worker, &thread_data[i], 0, NULL);
+        threads[i] = CreateThread(NULL, 0, average_worker, &thread_data[i], 0, NULL);
     }
     WaitForMultipleObjects(number_of_threads, threads, TRUE, INFINITE);
     ll sum=0;
