@@ -96,7 +96,7 @@ int main(void){
             }
             CalculationResult result = calculate_average(data, N_SAMPLES, threads_number);
             sep();
-            printf("Average of our %d data:\t%.4f\n", N_SAMPLES, result.value);
+            printf("Average of our %d data:\t%.2f\n", N_SAMPLES, result.value);
             printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
             free(data);
             sep();
