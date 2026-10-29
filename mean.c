@@ -7,7 +7,7 @@
 
 typedef struct{ double value; double time_taken;} CalculationResult;
 typedef long long ll;
-
+typedef struct{ const int* data; int start; int end; ll partial_sum;} ThreadData;
 
 DWORD WINAPI worker(LPVOID arg){
     int id = *(int*)arg;
