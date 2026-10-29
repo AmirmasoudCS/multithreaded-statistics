@@ -32,7 +32,7 @@ DWORD WINAPI variance_worker(LPVOID arg){
 }
 
 void sep(){
-    printf("\n\n=========================\n\n");
+    printf("=========================\n");
 }
 
 int* sample(int number_of_samples){
@@ -149,7 +149,7 @@ int main(void){
         scanf("%d", &choice);
         sep();
         if(choice==0){
-            printf("Exiting the program...\n");
+            printf("Exiting the program...");
             sep();
             return 0;
         }
