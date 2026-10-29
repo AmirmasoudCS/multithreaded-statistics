@@ -11,7 +11,7 @@ typedef struct{ const int* data; int start; int end; ll partial_sum; double mean
 
 DWORD WINAPI average_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
-    ll local_sum=0;
+    double local_sum=0.0;
     for(ll i=args->start; i<args->end; i++){
         local_sum+=args->data[i];
     }
@@ -22,7 +22,7 @@ DWORD WINAPI average_worker(LPVOID arg){
 DWORD WINAPI variance_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
     double deviation;
-    double local_sum;
+    double local_sum=0.0;
     for(ll i = args->start; i < args->end; i++){
         deviation = args->data[i] - args->mean;
         local_sum += deviation*deviation;
@@ -111,7 +111,6 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
         sum+=thread_data[j].partial_sum;
         CloseHandle(threads[j]);
     }
-    QueryPerformanceCounter(&end);
     double average = (double)sum / number_of_samples;
     for(int i = 0; i < number_of_threads; i++){
         int start_index = i * chunk;
@@ -120,6 +119,7 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
         thread_data[i].start = start_index;
         thread_data[i].end = end_index;
         thread_data[i].partial_sum=0;
+        thread_data[i].mean = average;
         threads[i] = CreateThread(NULL, 0, variance_worker, &thread_data[i], 0, NULL);
     }
     WaitForMultipleObjects(number_of_threads, threads, TRUE, INFINITE);
@@ -132,6 +132,7 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
     double elapsed = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
     free(threads);
     free(thread_data);
+    QueryPerformanceCounter(&end);
     CalculationResult result = {variance, elapsed};
     return result;
 }
@@ -175,7 +176,7 @@ int main(void){
             }
             CalculationResult result = calculate_variance(data, N_SAMPLES, threads_number);
             sep();
-            printf("Variance of our %d data:\t%2.f\n", N_SAMPLES, result.value);
+            printf("Variance of our %d data:\t%.2f\n", N_SAMPLES, result.value);
             printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
             free(data);
             sep();
