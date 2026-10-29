@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
 #include <stdlib.h>
-#include <time.h>
 
 #define N_SAMPLES 100000000
 
@@ -144,6 +143,7 @@ int main(void){
     int* data = sample(N_SAMPLES);
     if(data==NULL){
         printf("Failed to allocate memory!\n");
+        return 1;
     }
     int choice;
     while(1){
@@ -154,6 +154,7 @@ int main(void){
         if(choice==0){
             printf("Exiting the program...\n");
             sep();
+            free(data);
             return 0;
         }
         else if(choice==1){
@@ -162,7 +163,6 @@ int main(void){
             sep();
             printf("Average of our %d data:\t%.2f\n", N_SAMPLES, result.value);
             printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
-            free(data);
             sep();
         }
         else if(choice==2){
@@ -171,7 +171,6 @@ int main(void){
             sep();
             printf("Variance of our %d data:\t%.2f\n", N_SAMPLES, result.value);
             printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
-            free(data);
             sep();
         }
         else{
@@ -180,6 +179,6 @@ int main(void){
             continue;
         }
     }
-
+    free(data);
     return 0;
 }
