@@ -149,7 +149,6 @@ int main(void){
         scanf("%d", &choice);
         sep();
         if(choice==0){
-            sep();
             printf("Exiting the program...\n");
             sep();
             return 0;
