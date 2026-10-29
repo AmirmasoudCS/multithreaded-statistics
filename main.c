@@ -11,7 +11,7 @@ typedef struct{ const int* data; int start; int end; ll partial_sum; double mean
 
 DWORD WINAPI average_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
-    ll local_sum=0.0;
+    ll local_sum=0;
     for(ll i=args->start; i<args->end; i++){
         local_sum+=args->data[i];
     }
