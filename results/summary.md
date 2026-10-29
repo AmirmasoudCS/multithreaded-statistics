@@ -1,16 +1,19 @@
 # Benchmark Summary
 
-Runtime is reported as the median of repeated measurements.
+Runtime is summarized using the median and interquartile range (IQR).
+IQR = 75th percentile - 25th percentile.
 Speedup = single-thread median / current median.
 Efficiency = speedup / thread count.
+Bootstrap confidence intervals use 10,000 resamples.
+The confidence intervals are estimates, not guarantees.
 
-| Operation | Threads | Runs | Median (s) | Mean (s) | Std. dev. (s) | Speedup | Efficiency |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| average | 1 | 10 | 0.032120 | 0.031320 | 0.001519 | 1.00x | 100.0% |
-| average | 2 | 10 | 0.017445 | 0.017470 | 0.000292 | 1.84x | 92.1% |
-| average | 3 | 10 | 0.013285 | 0.015192 | 0.003156 | 2.42x | 80.6% |
-| average | 4 | 10 | 0.012529 | 0.013387 | 0.002047 | 2.56x | 64.1% |
-| variance | 1 | 10 | 0.078040 | 0.081509 | 0.013769 | 1.00x | 100.0% |
-| variance | 2 | 10 | 0.044973 | 0.045103 | 0.001879 | 1.74x | 86.8% |
-| variance | 3 | 10 | 0.033209 | 0.035255 | 0.004356 | 2.35x | 78.3% |
-| variance | 4 | 10 | 0.032373 | 0.033006 | 0.004497 | 2.41x | 60.3% |
+| Operation | Threads | Runs | Median (s) | Q1 (s) | Q3 (s) | IQR (s) | Speedup | Speedup 95% CI | Efficiency |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| average | 1 | 20 | 0.031493 | 0.029922 | 0.031954 | 0.002033 | 1.00x | 0.95–1.05 | 100.0% |
+| average | 2 | 20 | 0.017029 | 0.015032 | 0.017466 | 0.002434 | 1.85x | 1.76–2.01 | 92.5% |
+| average | 3 | 20 | 0.014448 | 0.014173 | 0.014883 | 0.000710 | 2.18x | 2.07–2.23 | 72.7% |
+| average | 4 | 20 | 0.014499 | 0.013454 | 0.015819 | 0.002365 | 2.17x | 1.98–2.33 | 54.3% |
+| variance | 1 | 20 | 0.088592 | 0.084624 | 0.091394 | 0.006770 | 1.00x | 0.96–1.04 | 100.0% |
+| variance | 2 | 20 | 0.048509 | 0.047785 | 0.049121 | 0.001336 | 1.83x | 1.76–1.89 | 91.3% |
+| variance | 3 | 20 | 0.035706 | 0.035553 | 0.035903 | 0.000350 | 2.48x | 2.40–2.56 | 82.7% |
+| variance | 4 | 20 | 0.031943 | 0.030857 | 0.035801 | 0.004944 | 2.77x | 2.52–2.88 | 69.3% |
