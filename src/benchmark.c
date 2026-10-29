@@ -30,10 +30,6 @@ DWORD WINAPI variance_worker(LPVOID arg){
     return 0;
 }
 
-void sep(){
-    printf("=========================\n");
-}
-
 int* sample(int number_of_samples){
     int* data = malloc(number_of_samples * sizeof(int));
     if(data==NULL){
@@ -43,8 +39,6 @@ int* sample(int number_of_samples){
     for(int i = 0; i < number_of_samples; i++){
         data[i] = rand() % 100;
     }
-    printf("Sampling %d samples done!\n", number_of_samples);
-    sep();
     return data;
 }
 
