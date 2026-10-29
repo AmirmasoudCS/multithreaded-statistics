@@ -92,6 +92,9 @@ int main(void){
                 continue;
             }
             CalculationResult result = calculate_average(data, N_SAMPLES, threads_number);
+            sep();
+            printf("Average of our %d data:\t%.4f", N_SAMPLES, result.value);
+            printf("Time taken with %d threads:\t%.6f", threads_number, result.time_taken);
             free(data);
         }
         else if(choice==2){
