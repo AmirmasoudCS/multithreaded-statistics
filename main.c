@@ -143,10 +143,16 @@ int main(void){
     int choice;
     while(1){
         sep();
-        printf("What operation do you want to do?\n1. Average\n2. Variance\nChoice: ");
+        printf("What operation do you want to do?\n0. EXIT\n1. Average\n2. Variance\nChoice: ");
         scanf("%d", &choice);
         sep();
-        if(choice==1){
+        if(choice==0){
+            sep();
+            printf("Exiting the program...\n");
+            sep();
+            return 0;
+        }
+        else if(choice==1){
             int threads_number = get_number_of_threads();
             int* data = sample(N_SAMPLES);
             if(data==NULL){
@@ -167,10 +173,12 @@ int main(void){
                 printf("Failed to allocate memory!\n");
                 continue;
             }
-            // ops
-            printf("Haven't implemented yet.\n");
-            //
+            CalculationResult result = calculate_variance(data, N_SAMPLES, threads_number);
+            sep();
+            printf("Variance of our %d data:\t%2.f\n", N_SAMPLES, result.value);
+            printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
             free(data);
+            sep();
         }
         else{
             printf("Wrong Input!\n");
