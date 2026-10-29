@@ -29,7 +29,6 @@ int* sample(int number_of_samples){
         printf("Failed to allocate memory to data.\n");
         return NULL;
     }
-    srand(67);
     for(int i = 0; i < number_of_samples; i++){
         data[i] = rand() % 100;
     }
@@ -78,6 +77,8 @@ CalculationResult calculate_average(const int* data, int number_of_samples, int 
 }
 
 int main(void){
+    
+    srand(67);
 
     int choice;
     while(1){
@@ -93,9 +94,10 @@ int main(void){
             }
             CalculationResult result = calculate_average(data, N_SAMPLES, threads_number);
             sep();
-            printf("Average of our %d data:\t%.4f", N_SAMPLES, result.value);
-            printf("Time taken with %d threads:\t%.6f", threads_number, result.time_taken);
+            printf("Average of our %d data:\t%.4f\n", N_SAMPLES, result.value);
+            printf("Time taken with %d threads:\t%.6f\n", threads_number, result.time_taken);
             free(data);
+            sep();
         }
         else if(choice==2){
             int threads_number = get_number_of_threads();
