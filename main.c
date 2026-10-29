@@ -32,7 +32,7 @@ DWORD WINAPI variance_worker(LPVOID arg){
 }
 
 void sep(){
-    printf("=========================\n");
+    printf("\n\n=========================\n\n");
 }
 
 int* sample(int number_of_samples){
