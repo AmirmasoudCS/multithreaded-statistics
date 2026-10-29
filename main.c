@@ -32,7 +32,8 @@ int* sample(int number_of_samples){
     for(int i = 0; i < number_of_samples; i++){
         data[i] = rand() % 100;
     }
-    printf("Sampling %d samples done!", number_of_samples);
+    printf("Sampling %d samples done!\n", number_of_samples);
+    sep();
     return data;
 }
 
@@ -83,8 +84,9 @@ int main(void){
     int choice;
     while(1){
         sep();
-        printf("What operation do you want to do?\n1. Average\n2. Variance\n");
+        printf("What operation do you want to do?\n1. Average\n2. Variance\nChoice: ");
         scanf("%d", &choice);
+        sep();
         if(choice==1){
             int threads_number = get_number_of_threads();
             int* data = sample(N_SAMPLES);
