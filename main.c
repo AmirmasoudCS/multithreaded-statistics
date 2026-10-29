@@ -138,7 +138,7 @@ CalculationResult calculate_variance(const int* data, int number_of_samples, int
 }
 
 int main(void){
-    
+    sep();
     srand(67);
     int* data = sample(N_SAMPLES);
     if(data==NULL){
