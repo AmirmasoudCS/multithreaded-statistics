@@ -11,6 +11,10 @@ typedef struct{ const int* data; int start; int end; ll partial_sum;} ThreadData
 
 DWORD WINAPI worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
+    ll local_sum=0;
+    for(ll i=args->start; i=args->end; i++){
+        local_sum+=args->data[i];
+    }
     return 0;
 }
 
