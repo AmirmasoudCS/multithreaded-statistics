@@ -7,7 +7,7 @@
 
 typedef struct{ double value; double time_taken;} CalculationResult;
 typedef long long ll;
-typedef struct{ const int* data; int start; int end; ll partial_sum; ll mean;} ThreadData;
+typedef struct{ const int* data; int start; int end; ll partial_sum; double mean; double partial_variance;} ThreadData;
 
 DWORD WINAPI average_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
@@ -21,11 +21,13 @@ DWORD WINAPI average_worker(LPVOID arg){
 
 DWORD WINAPI variance_worker(LPVOID arg){
     ThreadData* args = (ThreadData*)arg;
-    ll local_sum=0;
-    for(ll i=args->start; i<args->end; i++){
-        local_sum+=args->data[i];
+    double deviation;
+    double local_sum;
+    for(ll i = args->start; i < args->end; i++){
+        deviation = args->data[i] - args->mean;
+        local_sum += deviation*deviation;
     }
-    args->partial_sum = local_sum;
+    args->partial_variance=local_sum;
     return 0;
 }
 
