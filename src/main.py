@@ -3,7 +3,7 @@ import random
 import threading
 import time
 
-N_SAMPLES = 1000000
+N_SAMPLES = 10000000
 NUMBER_OF_THREADS = 4
 
 def sample(number_of_samples: int) -> list[int]:
