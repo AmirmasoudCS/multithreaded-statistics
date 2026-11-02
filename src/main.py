@@ -22,14 +22,15 @@ def main():
     print(f"Number of samples: {N_SAMPLES}")
     print(f"Number of threads: {threads}")
 
+    numbers = sample(N_SAMPLES)
     threads = []
 
     start_time = time.time()
 
-    thread1 = threading.Thread(target=calculate_partial_sum, args=(0, N_SAMPLES/4 -1))
-    thread2 = threading.Thread(target=calculate_partial_sum, args=(N_SAMPLES/4, N_SAMPLES/4 * 2 - 1))
-    thread3 = thrading.Thread(target=calculate_partial_sum, args=(N_SAMPLES/4 * 2, N_SAMPLES/4 * 3 - 1))
-    thread4 = threading.Thread(target=calculate_partial_sum, args=(N_SAMPLES/4 * 3, N_SAMPLES - 1))
+    thread1 = threading.Thread(target=calculate_partial_sum, args=(numbers, 0, N_SAMPLES/4 -1))
+    thread2 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES/4, N_SAMPLES/4 * 2 - 1))
+    thread3 = thrading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES/4 * 2, N_SAMPLES/4 * 3 - 1))
+    thread4 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES/4 * 3, N_SAMPLES - 1))
 
     threads.append(thread1)
     threads.append(thread2)
