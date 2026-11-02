@@ -44,8 +44,8 @@ def main():
     for thread in threads:
         thread.join()
     
-    sum = results.sum()
-    average = sum/N_SAMPLES
+    total = sum(results)
+    average = total/N_SAMPLES
 
     end_time = time.time()
     elapsed_time = end_time - start_time
