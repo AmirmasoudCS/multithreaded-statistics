@@ -11,11 +11,11 @@ def sample(number_of_samples: int) -> list[int]:
         numbers.append(randomly_generated_number)
     return numbers
 
-def calculate_partial_sum(numbers: list[int], start: int, end: int, results: list[int], index_to_write: int) -> int:
+def calculate_partial_sum(numbers: list[int], start: int, end: int, results: list[int], index_to_write: int) -> None:
     local_sum = 0
     for i in range(start, end):
         local_sum += numbers[i]
-    return local_sum
+    results[index_to_write] = local_sum
 
 def main():
     threads = 4
@@ -44,7 +44,13 @@ def main():
     for thread in threads:
         thread.join()
     
+    sum = results.sum()
+    average = sum/N_SAMPLES
 
     end_time = time.time()
     elapsed_time = end_time - start_time
     
+    print("-------------------------------------")
+    print(f"AVerage of our samples: {average}")
+    print(f"Time took to take average: {elapsed_time}")
+    print("-------------------------------------")
