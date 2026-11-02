@@ -11,7 +11,7 @@ def sample(number_of_samples: int) -> list[int]:
         numbers.append(randomly_generated_number)
     return numbers
 
-def calculate_partial_sum(numbers: list[int], start: int, end: int) -> int:
+def calculate_partial_sum(numbers: list[int], start: int, end: int, results: list[int], index_to_write: int) -> int:
     local_sum = 0
     for i in range(start, end):
         local_sum += numbers[i]
@@ -24,13 +24,14 @@ def main():
 
     numbers = sample(N_SAMPLES)
     threads = []
+    results = [0] * 4
 
     start_time = time.time()
 
-    thread1 = threading.Thread(target=calculate_partial_sum, args=(numbers, 0, N_SAMPLES//4 -1))
-    thread2 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4, N_SAMPLES//4 * 2 - 1))
-    thread3 = thrading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 2, N_SAMPLES//4 * 3 - 1))
-    thread4 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 3, N_SAMPLES - 1))
+    thread1 = threading.Thread(target=calculate_partial_sum, args=(numbers, 0, N_SAMPLES//4 -1, results, 0))
+    thread2 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4, N_SAMPLES//4 * 2 - 1, results, 1))
+    thread3 = thrading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 2, N_SAMPLES//4 * 3 - 1, results, 2))
+    thread4 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 3, N_SAMPLES - 1, results, 3))
 
     threads.append(thread1)
     threads.append(thread2)
