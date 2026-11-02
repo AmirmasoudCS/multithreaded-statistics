@@ -57,5 +57,5 @@ def main():
 
 
 if __name__ == "__main__":
-    rnadom.seed(67)
+    random.seed(67)
     main()
