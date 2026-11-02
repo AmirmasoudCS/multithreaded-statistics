@@ -51,8 +51,8 @@ def main():
     elapsed_time = end_time - start_time
     
     print("-------------------------------------")
-    print(f"AVerage of our samples: {average}")
-    print(f"Time took to take average: {elapsed_time}")
+    print(f"AVerage of our samples: {average:.2f}")
+    print(f"Time took to take average: {elapsed_time:.6f}")
     print("-------------------------------------")
 
 
