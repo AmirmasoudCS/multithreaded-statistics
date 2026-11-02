@@ -54,3 +54,7 @@ def main():
     print(f"AVerage of our samples: {average}")
     print(f"Time took to take average: {elapsed_time}")
     print("-------------------------------------")
+
+
+if __name__ == "__main__":
+    main()
