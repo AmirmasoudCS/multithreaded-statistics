@@ -26,7 +26,7 @@ def main():
     threads = []
     results = [0] * 4
 
-    start_time = time.time()
+    start_time = time.perf_counter()
 
     thread1 = threading.Thread(target=calculate_partial_sum, args=(numbers, 0, N_SAMPLES//4, results, 0))
     thread2 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4, N_SAMPLES//4 * 2, results, 1))
@@ -47,7 +47,7 @@ def main():
     total = sum(results)
     average = total/N_SAMPLES
 
-    end_time = time.time()
+    end_time = time.perf_counter()
     elapsed_time = end_time - start_time
     
     print("-------------------------------------")
