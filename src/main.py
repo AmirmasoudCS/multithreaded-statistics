@@ -30,7 +30,7 @@ def main():
 
     thread1 = threading.Thread(target=calculate_partial_sum, args=(numbers, 0, N_SAMPLES//4, results, 0))
     thread2 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4, N_SAMPLES//4 * 2, results, 1))
-    thread3 = thrading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 2, N_SAMPLES//4 * 3, results, 2))
+    thread3 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 2, N_SAMPLES//4 * 3, results, 2))
     thread4 = threading.Thread(target=calculate_partial_sum, args=(numbers, N_SAMPLES//4 * 3, N_SAMPLES, results, 3))
 
     threads.append(thread1)
